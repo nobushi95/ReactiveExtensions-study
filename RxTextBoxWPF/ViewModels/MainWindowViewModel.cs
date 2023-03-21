@@ -18,7 +18,8 @@ namespace RxTextBoxWPF.ViewModels
             set
             {
                 _input = value;
-                OnPropertyChanged(nameof(Input));
+                // CallerMemberNameで呼び出し名であるプロパティの名前を引くことができる
+                OnPropertyChanged(); // OnPropertyChanged(nameof(Input)); と等価
                 //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Input))); // 上と等価？
             }
         }
@@ -29,7 +30,8 @@ namespace RxTextBoxWPF.ViewModels
             set
             {
                 _output = value;
-                OnPropertyChanged(nameof(Output));
+                // CallerMemberNameで呼び出し名であるプロパティの名前を引くことができる
+                OnPropertyChanged(); // OnPropertyChanged(nameof(Output)); と等価
                 //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Output))); // 上と等価？
             }
         }
@@ -47,7 +49,7 @@ namespace RxTextBoxWPF.ViewModels
                 .Subscribe(x => Output = $"Output: {x}");
         }
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler is not null)
