@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <Platforms>x64</Platforms>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
 
 </Project>
