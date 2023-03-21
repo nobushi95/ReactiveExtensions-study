@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RxTextBoxWPF"
+        xmlns:vms="clr-namespace:RxTextBoxWPF.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
         Width="800">
+    <Window.DataContext>
+        <vms:MainWindowViewModel />
+    </Window.DataContext>
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="HorizontalAlignment"
@@ -22,8 +26,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0">Input</TextBox>
+        <TextBox Grid.Row="0"
+                 Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
         <TextBox Grid.Row="1"
-                 IsReadOnly="True">Output</TextBox>
+                 IsReadOnly="True"
+                 Text="{Binding Output}" />
     </Grid>
 </Window>
