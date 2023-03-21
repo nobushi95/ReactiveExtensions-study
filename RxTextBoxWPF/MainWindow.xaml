@@ -13,9 +13,7 @@
         <vms:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="HorizontalAlignment"
-                    Value="Stretch" />
+        <Style TargetType="StackPanel">
             <Setter Property="VerticalAlignment"
                     Value="Center" />
         </Style>
@@ -26,10 +24,127 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0"
-                 Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Row="1"
-                 IsReadOnly="True"
-                 Text="{Binding Output}" />
+        <StackPanel Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">None:</TextBlock>
+                <!--TextBoxの初期値はTwoWay-->
+                <TextBox Grid.Column="1"
+                         Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">Default:</TextBlock>
+                <!--TextBoxの初期値はTwoWay-->
+                <TextBox Grid.Column="1"
+                         Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=Default}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">OneTime:</TextBlock>
+                <!--最初の1度のみなので初期値が入るのみ-->
+                <TextBox Grid.Column="1"
+                         Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">OneWay:</TextBlock>
+                <!--ソースからターゲットなので、TwoWayのTextBoxでソースが変更されると表示も変更される、ターゲットからソースの経路をたどるOutputは変更されない-->
+                <TextBox Grid.Column="1"
+                         Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">OneWayToSource:</TextBlock>
+                <!--ターゲットからソースなので、TwoWayのTextBoxでソースが変更されても表示は変更されない、ターゲットからソースの経路をたどるOutputは変更される-->
+                <TextBox Grid.Column="1"
+                         Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" />
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0">None:</TextBlock>
+                <!--TextBoxの初期値はTwoWay-->
+                <TextBox Grid.Column="1"
+                         IsReadOnly="True"
+                         Text="{Binding Output}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">Default:</TextBlock>
+                <!--TextBoxの初期値はTwoWay-->
+                <TextBox Grid.Column="1"
+                         IsReadOnly="True"
+                         Text="{Binding Output, Mode=Default}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0">OneTime:</TextBlock>
+                <!--最初の1度のみなので初期値が入るのみ-->
+                <TextBox Grid.Column="1"
+                         IsReadOnly="True"
+                         Text="{Binding Output, Mode=OneTime}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0">OneWay</TextBlock>
+                <!--ソースからターゲットなので、Outputが更新され、表示される-->
+                <TextBox Grid.Column="1"
+                         IsReadOnly="True"
+                         Text="{Binding Output, Mode=OneWay}" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0">OneWayToSource:</TextBlock>
+                <!--ターゲットからソースなので、何も出力されない-->
+                <TextBox Grid.Column="1"
+                         IsReadOnly="True"
+                         Text="{Binding Output, Mode=OneWayToSource}" />
+            </Grid>
+        </StackPanel>
+
     </Grid>
 </Window>
