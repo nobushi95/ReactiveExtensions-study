@@ -9,8 +9,8 @@ namespace RxTextBoxWPF.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string _input;
-        private string _output;
+        private string _input = "Input";
+        private string _output = "Output: ";
 
         public string Input
         {
