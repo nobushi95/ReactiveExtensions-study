@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <TextBox Grid.Row="0"
-                 Text="{Binding Input, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+                 Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="1"
                  IsReadOnly="True"
                  Text="{Binding Output}" />
